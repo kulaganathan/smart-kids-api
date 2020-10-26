@@ -1,3 +1,5 @@
+DROP TABLE questions;
+
 DROP TABLE topics;
 
 DROP TABLE courses;
