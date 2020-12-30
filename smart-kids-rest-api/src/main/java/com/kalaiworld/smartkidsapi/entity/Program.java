@@ -2,10 +2,7 @@ package com.kalaiworld.smartkidsapi.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,8 +10,9 @@ import javax.persistence.Table;
 public class Program {
 
     @Id
-    @Column(name = "program_id")
-    private String programId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String refId;
     private String name;
     private String description;
 
