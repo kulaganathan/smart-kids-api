@@ -7,8 +7,8 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "programs")
-public class Program {
+@Table(name = "courses")
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,5 +17,11 @@ public class Program {
     private String refId;
     private String name;
     private String description;
+    @JsonIgnore
+    @Column(name = "subject_id")
+    private Long subjectId;
+    @JsonIgnore
+    @Column(name = "program_id")
+    private Long programId;
 
 }
