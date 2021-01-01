@@ -32,6 +32,7 @@ public class SubjectController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(subjects);
         } catch (Exception e) {
+            log.error("Internal Server Error: {}", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Internal Server Error occurred. Please contact administrator.");
         }
