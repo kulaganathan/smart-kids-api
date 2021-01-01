@@ -17,11 +17,12 @@ public class Topic {
     private String refId;
     private String name;
     private String description;
-    @JsonIgnore
     @Column(name = "course_id")
     private String courseId;
-    @JsonIgnore
     @Column(name = "template_id")
     private String templateId;
+
+    Topic() {
+    }
 
 }
