@@ -1,11 +1,12 @@
 package com.kalaiworld.smartkidsapi.service;
 
-import com.kalaiworld.smartkidsapi.entity.Topic;
+import com.kalaiworld.smartkidsapi.entity.Question;
 import com.kalaiworld.smartkidsapi.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class QuestionService {
@@ -13,12 +14,22 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public List<Topic> getQuestions(String topicId) {
-        List<Topic> topics = null;
+    public List<Question> getQuestions(String topicId) {
+        List<Question> questions = null;
         if (!topicId.isEmpty()) {
-            topics = questionRepository.findByTopicId(topicId);
+            questions = questionRepository.findByTopicId(topicId);
         }
-        return topics;
+        return questions;
+    }
+
+    public String saveQuestion(Question question) {
+        String refId = null;
+        if (question != null) {
+            question.setRefId(UUID.randomUUID().toString());
+            Question savedQuestion = questionRepository.save(question);
+            refId = savedQuestion.getRefId();
+        }
+        return refId;
     }
 
 }

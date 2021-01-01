@@ -2,6 +2,7 @@ package com.kalaiworld.smartkidsapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.*;
 
@@ -11,14 +12,15 @@ import javax.persistence.*;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
     private String refId;
-    @JsonIgnore
     @Column(name = "topic_id")
+    @NonNull
     private String topicId;
     @Column(name = "line_1")
+    @NonNull
     private String line1;
     @Column(name = "line_2")
     private String line2;
@@ -34,6 +36,10 @@ public class Question {
     private String option3;
     @Column(name = "option_4")
     private String option4;
+    @NonNull
     private String answer;
+
+    Question() {
+    }
 
 }

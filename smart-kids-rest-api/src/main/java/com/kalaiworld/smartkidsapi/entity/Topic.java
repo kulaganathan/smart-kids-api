@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Topic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
     private String refId;
