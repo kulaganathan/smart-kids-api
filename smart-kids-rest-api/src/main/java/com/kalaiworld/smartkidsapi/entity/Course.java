@@ -19,9 +19,9 @@ public class Course {
     private String description;
     @JsonIgnore
     @Column(name = "subject_id")
-    private Long subjectId;
+    private String subjectId;
     @JsonIgnore
     @Column(name = "program_id")
-    private Long programId;
+    private String programId;
 
 }

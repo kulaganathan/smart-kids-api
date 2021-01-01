@@ -32,6 +32,7 @@ public class TemplateController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(templates);
         } catch (Exception e) {
+            log.error("Internal Server Error: {}", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Internal Server Error occurred. Please contact administrator.");
         }

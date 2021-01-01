@@ -32,6 +32,7 @@ public class ProgramController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(programs);
         } catch (Exception e) {
+            log.error("Internal Server Error: {}", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Internal Server Error occurred. Please contact administrator.");
         }

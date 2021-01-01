@@ -55,18 +55,18 @@ CREATE TABLE courses
     ref_id character varying NOT NULL,
     name character varying NOT NULL,
     description character varying,
-    subject_id bigint NOT NULL,
-    program_id bigint NOT NULL,
+    subject_id character varying NOT NULL,
+    program_id character varying NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT uk_courses_ref_id UNIQUE (ref_id),
     CONSTRAINT uk_courses_name UNIQUE (name, program_id, subject_id),
     CONSTRAINT fk_courses_subject_id FOREIGN KEY (subject_id)
-        REFERENCES subjects (id) MATCH SIMPLE
+        REFERENCES subjects (ref_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
     CONSTRAINT fk_courses_program_id FOREIGN KEY (program_id)
-        REFERENCES programs (id) MATCH SIMPLE
+        REFERENCES programs (ref_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
@@ -78,18 +78,18 @@ CREATE TABLE topics
     ref_id character varying NOT NULL,
     name character varying NOT NULL,
     description character varying ,
-    course_id integer NOT NULL,
-    template_id integer NOT NULL,
+    course_id character varying NOT NULL,
+    template_id character varying NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT uk_topics_ref_id UNIQUE (ref_id),
     CONSTRAINT uk_topics_name UNIQUE (name, course_id),
     CONSTRAINT fk_topics_course_id FOREIGN KEY (course_id)
-        REFERENCES courses (id) MATCH SIMPLE
+        REFERENCES courses (ref_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
     CONSTRAINT fk_topics_template_id FOREIGN KEY (template_id)
-        REFERENCES templates (id) MATCH SIMPLE
+        REFERENCES templates (ref_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
@@ -99,7 +99,7 @@ CREATE TABLE questions
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
     ref_id character varying NOT NULL,
-    topic_id bigint NOT NULL,
+    topic_id character varying NOT NULL,
     line_1 character varying NOT NULL,
     line_2 character varying,
     line_3 character varying,
@@ -112,7 +112,7 @@ CREATE TABLE questions
     PRIMARY KEY (id),
     CONSTRAINT uk_questions_ref_id UNIQUE (ref_id),
     CONSTRAINT fk_topics_topic_id FOREIGN KEY (topic_id)
-            REFERENCES topics (id) MATCH SIMPLE
+            REFERENCES topics (ref_id) MATCH SIMPLE
             ON UPDATE NO ACTION
             ON DELETE NO ACTION
             NOT VALID
@@ -122,15 +122,15 @@ CREATE TABLE images
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
     ref_id character varying NOT NULL,
-    question_id bigint NOT NULL,
+    question_id character varying NOT NULL,
     image_num smallint NOT NULL,
     url character varying NOT NULL,
-    description character varying ,
+    description character varying,
     PRIMARY KEY (id),
     CONSTRAINT uk_images_ref_id UNIQUE (ref_id),
     CONSTRAINT uk_images_image_num UNIQUE (question_id, image_num),
     CONSTRAINT fk_images_question_id FOREIGN KEY (question_id)
-        REFERENCES questions (id) MATCH SIMPLE
+        REFERENCES questions (ref_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
