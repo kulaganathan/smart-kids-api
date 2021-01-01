@@ -1,3 +1,7 @@
 # smart-kids-api
 
-To run the api in local: ./mvnw clean spring-boot:run -Dspring-boot.run.profiles=local
+Local setup:
+
+1. Create the DB and set DB schema/roles/users
+2. Run the flyway app first.
+3. Build/Run the API:   ./mvnw clean spring-boot:run -Dspring-boot.run.profiles=local
