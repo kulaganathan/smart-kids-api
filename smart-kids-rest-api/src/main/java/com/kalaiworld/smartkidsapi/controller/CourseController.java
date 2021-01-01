@@ -39,10 +39,10 @@ public class CourseController {
     }
 
     @GetMapping("/{programRefId}/{subjectRefId}")
-    public ResponseEntity<?> getCourse(@PathVariable String programRefId, @PathVariable String subjectRefId) {
+    public ResponseEntity<?> getCourses(@PathVariable String programRefId, @PathVariable String subjectRefId) {
         log.debug("Inside Course GET API by programRefId and subjectRefId");
         try {
-            List<Course> courses = courseService.getCourse(programRefId, subjectRefId);
+            List<Course> courses = courseService.getCourses(programRefId, subjectRefId);
             if (courses == null || courses.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
             }

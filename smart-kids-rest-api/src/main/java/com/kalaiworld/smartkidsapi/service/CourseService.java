@@ -17,7 +17,7 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public List<Course> getCourse(String programRefId, String subjectRefId) {
+    public List<Course> getCourses(String programRefId, String subjectRefId) {
         List<Course> courses = null;
         if (!programRefId.isEmpty() && subjectRefId.isEmpty()) {
             courses = courseRepository.findByProgramIdAndSubjectId(programRefId, subjectRefId);
