@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS topics CASCADE;
 
 DROP TABLE IF EXISTS courses CASCADE;
 
+DROP TABLE IF EXISTS templates CASCADE;
+
 DROP TABLE IF EXISTS subjects CASCADE;
 
 DROP TABLE IF EXISTS programs CASCADE;
@@ -34,6 +36,17 @@ CREATE TABLE programs
     PRIMARY KEY (id),
     CONSTRAINT uk_programs_ref_id UNIQUE (ref_id),
     CONSTRAINT uk_programs_name UNIQUE (name)
+);
+
+CREATE TABLE templates
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    ref_id character varying NOT NULL,
+    name character varying NOT NULL,
+    description character varying,
+    PRIMARY KEY (id),
+    CONSTRAINT uk_templates_ref_id UNIQUE (ref_id),
+    CONSTRAINT uk_templates_name UNIQUE (name)
 );
 
 CREATE TABLE courses
@@ -66,12 +79,17 @@ CREATE TABLE topics
     name character varying NOT NULL,
     description character varying ,
     course_id integer NOT NULL,
-    template_name character varying NOT NULL,
+    template_id integer NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT uk_topics_ref_id UNIQUE (ref_id),
     CONSTRAINT uk_topics_name UNIQUE (name, course_id),
     CONSTRAINT fk_topics_course_id FOREIGN KEY (course_id)
         REFERENCES courses (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT fk_topics_template_id FOREIGN KEY (template_id)
+        REFERENCES templates (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
@@ -120,14 +138,16 @@ CREATE TABLE images
 
 -- Assign ownership
 
-ALTER TABLE subjects OWNER to kalai;
+ALTER TABLE subjects OWNER to flyway_user;
 
-ALTER TABLE programs OWNER to kalai;
+ALTER TABLE programs OWNER to flyway_user;
 
-ALTER TABLE courses OWNER to kalai;
+ALTER TABLE templates OWNER to flyway_user;
 
-ALTER TABLE topics OWNER to kalai;
+ALTER TABLE courses OWNER to flyway_user;
 
-ALTER TABLE questions OWNER to kalai;
+ALTER TABLE topics OWNER to flyway_user;
 
-ALTER TABLE images OWNER to kalai;
+ALTER TABLE questions OWNER to flyway_user;
+
+ALTER TABLE images OWNER to flyway_user;

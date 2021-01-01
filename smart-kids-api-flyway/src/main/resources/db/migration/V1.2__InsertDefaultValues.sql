@@ -26,3 +26,9 @@ INSERT INTO courses(ref_id, name, description, subject_id, program_id)
 	VALUES ('0f76273e-a120-4e22-b96a-a61a71610a9d', 'multiplication', 'Multiplication', 1, 2);
 INSERT INTO courses(ref_id, name, description, subject_id, program_id)
 	VALUES ('204ccac4-fd55-4da6-9343-24c2172e830e', 'verbal', 'Verbal', 3, 2);
+
+INSERT INTO templates(ref_id, name, description)
+	VALUES ('a0c61446-9964-470c-bc8d-c8c539344db7', 'picture analogies', 'Picture/Verbal Analogies');
+
+INSERT INTO topics(ref_id, name, description, course_id, template_id)
+	VALUES ('b8686e0d-b469-4679-b69b-1dc0f8776378', 'Picture/Verbal Analogies', 'Picture/Verbal Analogies', 4, 1);
