@@ -37,6 +37,7 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity<?> addQuestion(@RequestBody Question question) {
         log.debug("Inside question POST API.");
+        log.info("Question payload is {}", question);
         try {
             String refId = questionService.saveQuestion(question);
             if (refId == null || refId.isEmpty()) {
