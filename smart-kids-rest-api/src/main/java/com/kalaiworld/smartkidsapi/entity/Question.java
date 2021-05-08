@@ -3,18 +3,25 @@ package com.kalaiworld.smartkidsapi.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NonNull;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "questions")
-public class Question {
+public class Question implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
+    @Column(name = "ref_id")
     private String refId;
     @Column(name = "topic_id")
     @NonNull
@@ -38,8 +45,12 @@ public class Question {
     private String option4;
     @NonNull
     private String answer;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    @LazyCollection(LazyCollectionOption.TRUE)
+    @Fetch(FetchMode.SELECT)
+    private List<Image> images;
 
-    Question() {
+    public Question() {
     }
 
 }
