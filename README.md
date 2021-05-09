@@ -8,4 +8,4 @@ Local setup:
 4. Build/Run the API: ./mvnw clean spring-boot:run -Dspring-boot.run.profiles=local
 
 Swagger:
-http://localhost:8081/swagger-ui/#/
+http://localhost:8082/swagger-ui/#/
