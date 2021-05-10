@@ -15,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/course")
+@RequestMapping("api/courses")
 public class CourseController {
 
     @Autowired

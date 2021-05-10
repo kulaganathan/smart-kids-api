@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/subject")
+@RequestMapping("api/subjects")
 public class SubjectController {
 
     @Autowired
