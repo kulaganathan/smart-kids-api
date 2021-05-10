@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/template")
+@RequestMapping("api/templates")
 public class TemplateController {
 
     @Autowired

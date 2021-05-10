@@ -2,6 +2,7 @@ package com.kalaiworld.smartkidsapi.controller;
 
 import com.kalaiworld.smartkidsapi.entity.Program;
 import com.kalaiworld.smartkidsapi.repository.ProgramRepository;
+import com.kalaiworld.smartkidsapi.service.ProgramService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,13 +15,16 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/program")
+@RequestMapping("api/programs")
 public class ProgramController {
 
     @Autowired
     private ProgramRepository programRepository;
 
-    @GetMapping("/all")
+    @Autowired
+    private ProgramService programService;
+
+    @GetMapping
     public ResponseEntity<?> getPrograms() {
         log.debug("Inside programs GET API controller");
         try {
@@ -36,5 +40,9 @@ public class ProgramController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Internal Server Error occurred. Please contact administrator.");
         }
+    }
+
+    public void createProgram(Program program){
+
     }
 }

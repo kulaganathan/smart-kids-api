@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/question")
+@RequestMapping("api/questions")
 public class QuestionController {
 
     @Autowired
