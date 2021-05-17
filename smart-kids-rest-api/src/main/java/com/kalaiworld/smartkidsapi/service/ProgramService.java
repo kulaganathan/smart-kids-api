@@ -30,6 +30,8 @@ public class ProgramService extends BasicService {
         if (program.getRefId() == null) {
             throw new NullPointerException("Program Ref Id cannot be null!");
         }
+        Program programInDb = programRepository.findByRefId(program.getRefId());
+        program.setId(programInDb.getId());
         log.info("program reference id: {}", program.getRefId());
         return programRepository.save(program);
     }
