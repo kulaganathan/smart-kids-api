@@ -16,7 +16,10 @@ public class ProgramValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        ProgramDto program = (ProgramDto) o;
         ValidationUtils.rejectIfEmpty(errors, "name", "Name cannot be empty");
+        ProgramDto programDto = (ProgramDto) o;
+        if (programDto.getName().length() < 3) {
+            errors.rejectValue("name", "Name cannot be less than 3 characters!");
+        }
     }
 }
