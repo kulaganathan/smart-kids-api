@@ -1,10 +1,12 @@
 package com.kalaiworld.smartkidsapi.controller;
 
+import com.kalaiworld.smartkidsapi.dto.ProgramDto;
 import com.kalaiworld.smartkidsapi.entity.Program;
 import com.kalaiworld.smartkidsapi.repository.ProgramRepository;
 import com.kalaiworld.smartkidsapi.service.ProgramService;
 import com.kalaiworld.smartkidsapi.validator.ProgramValidator;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,9 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/programs", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProgramController {
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private ProgramRepository programRepository;
@@ -53,7 +58,15 @@ public class ProgramController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Program> createProgram(@Validated @RequestBody Program program) {
-        return new ResponseEntity<Program>(programService.createProgram(program), HttpStatus.CREATED);
+    public ResponseEntity<Program> createProgram(@Validated @RequestBody ProgramDto programDto) {
+        Program program=modelMapper.map(programDto,Program.class);
+        return new ResponseEntity<>(programService.createProgram(program), HttpStatus.CREATED);
     }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Program> modifyProgram(@Validated @RequestBody ProgramDto programDto) {
+        Program program=modelMapper.map(programDto,Program.class);
+        return new ResponseEntity<>(programService.modifyProgram(program), HttpStatus.OK);
+    }
+
 }
