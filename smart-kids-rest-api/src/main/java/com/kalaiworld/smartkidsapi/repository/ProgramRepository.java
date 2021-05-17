@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface ProgramRepository extends JpaRepository<Program, Long> {
     List<Program> findAll();
+
+    Program findByRefId(String refId);
+
 }

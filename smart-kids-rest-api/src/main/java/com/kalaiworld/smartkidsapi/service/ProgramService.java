@@ -22,4 +22,29 @@ public class ProgramService extends BasicService {
         log.info("program reference id: {}", program.getRefId());
         return programRepository.save(program);
     }
+
+    public Program modifyProgram(Program program) {
+        if (program == null) {
+            throw new NullPointerException("Program cannot be null!");
+        }
+        if (program.getRefId() == null) {
+            throw new NullPointerException("Program Ref Id cannot be null!");
+        }
+        Program programInDb = programRepository.findByRefId(program.getRefId());
+        program.setId(programInDb.getId());
+        log.info("program reference id: {}", program.getRefId());
+        return programRepository.save(program);
+    }
+
+    public boolean deleteProgram(String refId) {
+        if (refId == null) {
+            throw new NullPointerException("Program Ref Id cannot be null!");
+        }
+        Program program = programRepository.findByRefId(refId);
+        if (program == null) {
+            throw new NullPointerException("Program does not exist!");
+        }
+        programRepository.deleteById(program.getId());
+        return true;
+    }
 }

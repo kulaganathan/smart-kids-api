@@ -1,6 +1,6 @@
 package com.kalaiworld.smartkidsapi.validator;
 
-import com.kalaiworld.smartkidsapi.entity.Program;
+import com.kalaiworld.smartkidsapi.dto.ProgramDto;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -11,12 +11,12 @@ public class ProgramValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return Program.class.isAssignableFrom(aClass);
+        return ProgramDto.class.isAssignableFrom(aClass);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        Program program = (Program) o;
+        ProgramDto program = (ProgramDto) o;
         ValidationUtils.rejectIfEmpty(errors, "name", "Name cannot be empty");
     }
 }
