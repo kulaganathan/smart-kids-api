@@ -40,7 +40,7 @@ public class ProgramController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getPrograms() {
+    public ResponseEntity<List<Program>> getPrograms() {
         log.debug("Inside programs GET API controller");
         try {
             log.info("Program Repo call - " + programRepository.findAll().toString());
@@ -52,8 +52,7 @@ public class ProgramController {
                     .body(programs);
         } catch (Exception e) {
             log.error("Internal Server Error: {}", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Internal Server Error occurred. Please contact administrator.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
@@ -67,6 +66,11 @@ public class ProgramController {
     public ResponseEntity<Program> modifyProgram(@Validated @RequestBody ProgramDto programDto) {
         Program program=modelMapper.map(programDto,Program.class);
         return new ResponseEntity<>(programService.modifyProgram(program), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{refId}")
+    public ResponseEntity<Boolean> deleteProgram(@PathVariable String refId) {
+        return new ResponseEntity<>(programService.deleteProgram(refId), HttpStatus.NO_CONTENT);
     }
 
 }
